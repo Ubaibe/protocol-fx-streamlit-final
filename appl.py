@@ -137,7 +137,7 @@ elif st.session_state.stage == "quiz":
                 f"{st.session_state.feedback}</div>",
                 unsafe_allow_html=True
             )
-             st.markdown(
+            st.markdown(
             f"<div style='border: 1px solid #ccc; padding: 15px; margin-top: 10px;'>"
             f"<b>Explanation:</b> {st.session_state.explanation}</div>",
             unsafe_allow_html = True
@@ -210,5 +210,6 @@ elif st.session_state.stage == "end":
         st.session_state.question_key += 1
 
         st.rerun()
+
 
 
