@@ -96,11 +96,11 @@ elif st.session_state.stage == "quiz":
             col_true, col_false = st.columns(2)
             with col_true:
                 if st.button("True", key=f"true_{st.session_state.question_key}"):
-                is_right = st.session_state.quiz.check_answer("True")
-                st.session_state.feedback = "Correct!" if is_right else "Incorrect!"
-                st.session_state.explanation = html.unescape(st.session_state.quiz.current_question.explanation)
-                st.session_state.answered = True
-                st.rerun()
+                    is_right = st.session_state.quiz.check_answer("True")
+                    st.session_state.feedback = "Correct!" if is_right else "Incorrect!"
+                    st.session_state.explanation = html.unescape(st.session_state.quiz.current_question.explanation)
+                    st.session_state.answered = True
+                    st.rerun()
         with col_false:
             if st.button("False", key=f"false_{st.session_state.question_key}"):
                 is_right = st.session_state.quiz.check_answer("False")
@@ -210,4 +210,5 @@ elif st.session_state.stage == "end":
         st.session_state.question_key += 1
 
         st.rerun()
+
 
