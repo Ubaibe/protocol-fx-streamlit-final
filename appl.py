@@ -94,21 +94,38 @@ elif st.session_state.stage == "quiz":
         # True/False buttons
         col_true, col_false = st.columns(2)
         with col_true:
-            if st.button("True", key=f"true_{st.session_state.question_key}", disabled=st.session_state.answered):
-                is_right = st.session_state.quiz.check_answer("True")
-                st.session_state.feedback = "Correct!" if is_right else "Incorrect!"
-                st.session_state.feedback_time = time.time()
-                st.session_state.explanation = html.unescape(st.session_state.quiz.current_question.explanation)
-                st.session_state.answered = True
-                st.rerun()
-        with col_false:
-            if st.button("False", key=f"false_{st.session_state.question_key}", disabled=st.session_state.answered):
-                is_right = st.session_state.quiz.check_answer("False")
-                st.session_state.feedback = "Correct!" if is_right else "Incorrect!"
-                st.session_state.feedback_time = time.time()
-                st.session_state.explanation = html.unescape(st.session_state.quiz.current_question.explanation)
-                st.session_state.answered = True
-                st.rerun()
+            if st.button("True", key=f"true_{st.session_state.question_key}"):
+            is_right = st.session_state.quiz.check_answer("True")
+            st.session_state.feedback = "Correct!" if is_right else "Incorrect!"
+            st.session_state.explanation = html.unescape(st.session_state.quiz.current_question.explanation)
+            st.session_state.answered = True
+            st.rerun()
+    with col_false:
+        if st.button("False", key=f"false_{st.session_state.question_key}"):
+            is_right = st.session_state.quiz.check_answer("False")
+            st.session_state.feedback = "Correct!" if is_right else "Incorrect!"
+            st.session_state.explanation = html.unescape(st.session_state.quiz.current_question.explanation)
+            st.session_state.answered = True
+            st.rerun()
+
+
+
+            
+        #     if st.button("True", key=f"true_{st.session_state.question_key}", disabled=st.session_state.answered):
+        #         is_right = st.session_state.quiz.check_answer("True")
+        #         st.session_state.feedback = "Correct!" if is_right else "Incorrect!"
+        #         st.session_state.feedback_time = time.time()
+        #         st.session_state.explanation = html.unescape(st.session_state.quiz.current_question.explanation)
+        #         st.session_state.answered = True
+        #         st.rerun()
+        # with col_false:
+        #     if st.button("False", key=f"false_{st.session_state.question_key}", disabled=st.session_state.answered):
+        #         is_right = st.session_state.quiz.check_answer("False")
+        #         st.session_state.feedback = "Correct!" if is_right else "Incorrect!"
+        #         st.session_state.feedback_time = time.time()
+        #         st.session_state.explanation = html.unescape(st.session_state.quiz.current_question.explanation)
+        #         st.session_state.answered = True
+        #         st.rerun()
 
         # Feedback and explanation
         # In app.py, quiz screen, replace the feedback/explanation block
@@ -119,8 +136,13 @@ elif st.session_state.stage == "quiz":
                 f"{st.session_state.feedback}</div>",
                 unsafe_allow_html=True
             )
+             st.markdown(
+            f"<div style='border: 1px solid #ccc; padding: 15px; margin-top: 10px;'>"
+            f"<b>Explanation:</b> {st.session_state.explanation}</div>",
+            unsafe_allow_html = True
+            )
             # Display explanation persistently
-            st.markdown(f"**Explanation:** {st.session_state.explanation}")
+            # st.markdown(f"**Explanation:** {st.session_state.explanation}")
             # Add Next Question button
             if st.button("Next Question", key=f"next_{st.session_state.question_key}"):
                 st.session_state.feedback = None
@@ -185,4 +207,5 @@ elif st.session_state.stage == "end":
         st.session_state.feedback = None
         st.session_state.explanation = None
         st.session_state.question_key += 1
+
         st.rerun()
